@@ -1,0 +1,28 @@
+---
+snakefile: Snakefile
+cores: 1
+keep-going: True
+printshellcmds: True
+
+# cluster
+cluster: "qsub -l select={resources.sel}:ncpus={resources.cpus}:mem={resources.memgb}:scratch_local={resources.scratchgb} \
+	-l walltime={resources.walltime}"
+default-resources:
+ - sel=1
+ - cpus=1
+ - memgb="2gb"
+ - scratchgb="100gb"
+ - walltime="24:00:00"
+ - tmpdir="/var/tmp"
+max-jobs-per-second: 1  
+jobs: 30
+cluster-cancel: "qdel"
+group-components:
+ - Trimmomatic=1 
+ - FastQC-raw=1
+ - FastQC-trim=1
+ - Trimmomatic=1 
+ - FastQC-crop=1
+ - crop=10
+ - sampling=5
+jobname: "{rule}.{jobid}"
