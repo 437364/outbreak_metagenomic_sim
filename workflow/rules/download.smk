@@ -13,7 +13,8 @@ configfile: "config/profile/config.yaml"
 rule all:
 	input:
 	# input of the all rule are dictionary keys refered to as a wildcard "sample"
-		expand("results/raw/{sample}_1.fastq", sample=samples_dict.keys())
+		expand("results/fastqc/{sample}_1_fastqc.html", sample=samples_dict.keys()),
+		expand("results/fastqc/{sample}_2_fastqc.html", sample=samples_dict.keys())
  
 rule download_sra:
 	params:
@@ -35,7 +36,45 @@ rule download_sra:
 		module add mambaforge-22.9.0
 		conda activate sra-tools-3.0.3
 		export OMP_NUM_THREADS=$PBS_NUM_PPN
-		prefetch {params.sra_id} --max-size 100000000 -O results/sra/
+		prefetch {params.sra_id} --max-size 20000000 -O results/sra/
 		fasterq-dump -f -p --split-3 results/sra/{params.sra_id}/{params.sra_id}.sra -o results/raw/{wildcards.sample}
 		rm -r results/sra/{params.sra_id}
+		""")
+
+rule run_fastqc:
+	group: "5min"
+	input:
+		fq1 = "results/raw/{sample}_1.fastq",
+		fq2 = "results/raw/{sample}_2.fastq"
+	output:
+		html1 = "results/fastqc/{sample}_1_fastqc.html",
+		html2 = "results/fastqc/{sample}_2_fastqc.html"
+	resources:
+		memgb="8gb",
+		walltime="24:00:00",
+		cpus=1
+
+	run:
+		shell("""
+		module load fastqc
+		export OMP_NUM_THREADS=$PBS_NUM_PPN
+		fastqc {input.fq1} -o results/fastqc/
+		fastqc {input.fq2} -o results/fastqc/
+		""")
+
+rule run_multiqc:
+	input:
+		expand("results/fastqc/{sample}_1_fastqc.html", sample=samples_dict.keys()),
+		expand("results/fastqc/{sample}_2_fastqc.html", sample=samples_dict.keys())
+	output:
+		html = "results/multiqc/multiqc_report.html"
+	resources:
+		memgb="8gb",
+		walltime="24:00:00",
+		cpus=1
+
+	run:
+		shell("""
+		module load python36-modules-gcc
+		multiqc results/fastqc/ -o results/multiqc/
 		""")
