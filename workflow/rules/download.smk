@@ -75,6 +75,8 @@ rule run_multiqc:
 
 	run:
 		shell("""
-		module load python36-modules-gcc
+		module add mambaforge-22.9.0
+		mamba activate /storage/brno2/home/kratka/.conda/envs/snakemake
+		export OMP_NUM_THREADS=$PBS_NUM_PPN
 		multiqc results/fastqc/ -o results/multiqc/
 		""")
