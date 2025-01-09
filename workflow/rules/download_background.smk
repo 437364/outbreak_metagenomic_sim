@@ -14,7 +14,8 @@ rule all:
 	input:
 	# input of the all rule are dictionary keys refered to as a wildcard "sample"
 		expand("results/fastqc/{sample}_1_fastqc.html", sample=samples_dict.keys()),
-		expand("results/fastqc/{sample}_2_fastqc.html", sample=samples_dict.keys())
+		expand("results/fastqc/{sample}_2_fastqc.html", sample=samples_dict.keys()),
+		"results/multiqc/multiqc_report.html"
  
 rule download_sra:
 	params:
@@ -27,7 +28,7 @@ rule download_sra:
 	resources:
 		memgb="8gb",
 		walltime="24:00:00",
-		cpus=1
+		cpus=2
 
 	run:
 		print(wildcards.sample)
@@ -52,14 +53,15 @@ rule run_fastqc:
 	resources:
 		memgb="8gb",
 		walltime="24:00:00",
-		cpus=1
+		cpus=2
 
 	run:
 		shell("""
-		module load fastqc
+		module add mambaforge-22.9.0
+		mamba activate /storage/brno2/home/kratka/.conda/envs/snakemake
 		export OMP_NUM_THREADS=$PBS_NUM_PPN
-		fastqc {input.fq1} -o results/fastqc/
-		fastqc {input.fq2} -o results/fastqc/
+		fastqc {input.fq1} -o results/fastqc/ -t 2
+		fastqc {input.fq2} -o results/fastqc/ - t 2
 		""")
 
 rule run_multiqc:

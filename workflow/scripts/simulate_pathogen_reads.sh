@@ -1,3 +1,5 @@
+#!/bin/bash
+
 module add mambaforge-22.9.0
 mamba activate /storage/brno2/home/kratka/.conda/envs/snakemake
 cd /storage/brno2/home/kratka/outbreak_metagenomic_sim/
