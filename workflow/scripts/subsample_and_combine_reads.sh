@@ -26,18 +26,18 @@ do
 
     # Subsample the forward reads
     # background
-    back_1="seqtk sample -s1 ${background_data_dir}/${sample_name}_1.fastq ${background_reads} > results/combined/${counter}_${sample_name}_1.fastq
+    back_1="seqtk sample -s1 ${background_data_dir}/${sample_name}_1.fastq ${background_reads} > results/combined/${counter}_${sample_name}_1.fastq"
     eval $back_1
     # pathogen
-    pat_1="seqtk sample -s1 ${pathogen_data}_1.fastq ${pathogen_reads} >> results/combined/${counter}_${sample_name}_1.fastq
+    pat_1="seqtk sample -s1 ${pathogen_data}_1.fastq ${pathogen_reads} >> results/combined/${counter}_${sample_name}_1.fastq"
     eval $pat_1
 
     # Subsample the reverse reads
     # background
-    back_2="seqtk sample -s1 ${background_data_dir}/${sample_name}_2.fastq ${background_reads} > results/combined/${counter}_${sample_name}_2.fastq
+    back_2="seqtk sample -s1 ${background_data_dir}/${sample_name}_2.fastq ${background_reads} > results/combined/${counter}_${sample_name}_2.fastq"
     eval $back_2
     # pathogen
-    pat_2="seqtk sample -s1 ${pathogen_data}_2.fastq ${pathogen_reads} >> results/combined/${counter}_${sample_name}_2.fastq
+    pat_2="seqtk sample -s1 ${pathogen_data}_2.fastq ${pathogen_reads} >> results/combined/${counter}_${sample_name}_2.fastq"
     eval $pat_2
 
 
