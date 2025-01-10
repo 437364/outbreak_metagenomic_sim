@@ -34,13 +34,14 @@ notebooks/calculate_outbreak_growth.ipynb
     - reproduction number
     - starting prevalence
 - generates results/subsampling_table.tsv with background and pathogen abundances and read numbers to be used for subsampling 
-- 
+- adding random noise to the calculated pathogen abundance values could be developed later (link to github issue) 
 
 scripts/subsample_and_combine_reads.sh
 - subsamples the background and pathogen reads using seqtk according to the subsampling table  and concatenates them into paired-end fastq files
 - simulated samples are stored in the results/combined directory
 - combining the reads is done without mixing the order of background and pathogen reads, method for mixing could be developed later (link to github issue)
 - paralelization of the subsampling could be developed later (link to github issue)
+
 
 
 
