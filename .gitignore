@@ -1,2 +1,4 @@
 results/
 .snakemake/
+!results/multiqc/multiqc_data/multiqc_general_stats.txt
+!results/SraRunTable_filtered_ordered.csv

@@ -61,7 +61,7 @@ rule run_fastqc:
 		mamba activate /storage/brno2/home/kratka/.conda/envs/snakemake
 		export OMP_NUM_THREADS=$PBS_NUM_PPN
 		fastqc {input.fq1} -o results/fastqc/ -t 2
-		fastqc {input.fq2} -o results/fastqc/ - t 2
+		fastqc {input.fq2} -o results/fastqc/ -t 2
 		""")
 
 rule run_multiqc:
