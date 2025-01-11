@@ -17,6 +17,7 @@ echo "Counter: $counter"
 
 # read and process the TSV file
 mkdir -p results/combined
+rm -rf results/combined/*
 
 while IFS=$'\t' read -r sample_name collection_date sample_shortname total_reads days infected calculated_abundance background_reads lambda pathogen_reads actual_abundance
 do
