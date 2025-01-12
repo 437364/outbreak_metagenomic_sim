@@ -3,7 +3,7 @@
 This is my final project for the [Biosecurity Fundamentals course](https://biosecurityfundamentals.com/pandemics/) in collaboration with [Nucleic Acid Observatory](https://naobservatory.org/)
 
 # How to use this repository
-This repository contains the code for a demonstration of simulation of metagenomic data workflow. The code was executed on the [MetaCentrum HPC](https://metavo.metacentrum.cz/en/index.html), use on a different platform requires modification. The workflow has three steps better described in the [project report](https://437364.github.com/outbreak_metagenomic_sim/):
+This repository contains the code for a demonstration of simulation of metagenomic data workflow. The code was executed on the [MetaCentrum HPC](https://metavo.metacentrum.cz/en/index.html), use on a different platform requires modification. The workflow has three steps better described in the [project report](https://github.com/437364/outbreak_metagenomic_sim/blob/main/results/report.pdf):
 
 ## Step 1: Background metagenomic data
 [rules/download_background.smk](https://github.com/437364/outbreak_metagenomic_sim/blob/main/workflow/rules/download_background.smk) 

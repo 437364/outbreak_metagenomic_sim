@@ -8,3 +8,4 @@ results/multiqc/multiqc_data/*
 !results/multiqc/multiqc_report.html
 !results/SraRunTable_filtered_ordered.csv
 !results/subsampling_table.tsv
+!results/report.pdf
