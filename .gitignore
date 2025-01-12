@@ -1,5 +1,8 @@
 results/*
+results/multiqc/*
+results/multiqc/multiqc_data/*
 .snakemake/
 !results/multiqc/multiqc_data/multiqc_general_stats.txt
+!results/multiqc/multiqc_report.html
 !results/SraRunTable_filtered_ordered.csv
 !results/subsampling_table.tsv
